@@ -22,7 +22,7 @@ dependencies:
   pre:
     - npm install
     - docker login -e "." -u $QUAY_USERNAME -p $QUAY_PASSWORD quay.io
-    - docker-pull
+    - docker-pull -f deploy/k8s-scripts.config
     - docker build --rm=false -t ${DOCKERTAG}:latest .
 
   override:
@@ -40,7 +40,7 @@ deployment:
   production:
     branch: master
     commands:
-      - docker-push -f deploy/production.config
+      - docker-push -f deploy/k8s-scripts.config
       # - ensure-kubectl
       # - prepare-kubectl
       # - kubectl config set-context production --user $CLUSTER_NICKNAME_PRODUCTION --cluster $CLUSTER_NICKNAME_PRODUCTION --namespace kube-system
