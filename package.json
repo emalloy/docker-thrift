@@ -1,0 +1,14 @@
+{
+  "name": "docker-thrift",
+  "version": "1.0.0",
+  "description": "docker-thrift image Dockerfile and related k8s deployment files for reactiveops",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactiveops/docker-thrift.git"
+  },
+  "author": "ReactiveOps",
+  "license": "MIT",
+  "dependencies": {
+    "rok8s-scripts": "^4"
+  }
+}
