@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: thrift
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        tier: data
+        svc: thrift
+    spec:
+      containers:
+      - name: thrift
+        image: quay.io/reactiveops/docker-thrift:1.3.1
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 2000Mi
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+          - mountPath: /hbase/conf-inject/
+            name: hbase-site
+      volumes: 
+       - name: hbase-site
+         configMap:
+           name: thrift
+           items:
+           - key: hbase-site.xml
+             path: hbase-site.xml
