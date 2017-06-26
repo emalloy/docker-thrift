@@ -46,3 +46,11 @@ deployment:
       # - kubectl config set-context production --user $CLUSTER_NICKNAME_PRODUCTION --cluster $CLUSTER_NICKNAME_PRODUCTION --namespace kube-system
       # - kubectl config use-context production
       # - k8s-deploy -f deploy/production.config
+      #
+  release:
+    tag: /v.*/
+    owner: reactiveops
+      - git fetch --tags
+      - curl -O https://raw.githubusercontent.com/reactiveops/release.sh/v0.0.2/release
+      - /bin/bash release
+      - docker-push
